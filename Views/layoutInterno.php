@@ -1,7 +1,18 @@
 <?php
 
+    if(session_status() == PHP_SESSION_NONE)
+    {
+        session_start();
+    }
+
     function ShowHeader()
     {
+        $nombreUsuario = "";
+        if(isset($_SESSION["Nombre"]))
+        {
+           $nombreUsuario = $_SESSION["Nombre"];
+        }
+
         echo 
             '<header class="topbar">
                 <nav class="navbar top-navbar navbar-expand-md navbar-dark">
@@ -36,18 +47,25 @@
                         <ul class="navbar-nav float-right">
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="m-l-5 font-medium d-none d-sm-inline-block">Usuario... <i class="mdi mdi-chevron-down"></i></span>
+                                    <span class="m-l-5 font-medium d-none d-sm-inline-block">' . $nombreUsuario . '<i class="mdi mdi-chevron-down"></i></span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
                                     <span class="with-arrow">
                                         <span class="bg-primary"></span>
                                     </span>
                                     <div class="profile-dis scrollable">
+                                        <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="../Usuario/consultarPerfil.php">
-                                            <i class="fa fa-user-circle mr-2"></i> My Profile</a>
-                                            <div class="dropdown-divider"></div>
+                                            <i class="fa fa-user-circle mr-2"></i> Pefil de Usuario
+                                        </a>   
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="../Usuario/consultarPerfil.php">
+                                            <i class="fa fa-lock mr-2"></i> Control de Seguridad
+                                        </a>
+                                        <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="javascript:void(0)">
-                                            <i class="ti-wallet mr-2"></i> My Balance</a>
+                                            <i class="fa fa-sign-out mr-2"></i> Cerrar Sesión
+                                        </a>
                                     </div>
                                 </div>
                             </li>

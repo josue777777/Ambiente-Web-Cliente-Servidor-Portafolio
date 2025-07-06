@@ -1,5 +1,5 @@
 <?php
-    include_once $_SERVER["DOCUMENT_ROOT"] . '/Ambiente-Web-Cliente-Servidor-Portafolio/Models/connect.php';
+    include_once $_SERVER["DOCUMENT_ROOT"] . '/Curso/Models/connect.php';
 
     function ValidarInicioSesionModel($correo, $contrasenna)
     {
@@ -55,6 +55,25 @@
         {
             RegistrarError($error);
             return null;
+        }
+    }
+
+    function ActualizarContrasennaModel($idUsuario, $contrasenna)
+    {
+        try
+        {
+            $context = OpenDB();
+
+            $sp = "CALL ActualizarContrasenna('$idUsuario', '$contrasenna')";
+            $respuesta = $context -> query($sp);
+
+            CloseDB($context);            
+            return $respuesta;
+        }
+        catch(Exception $error)
+        {
+            RegistrarError($error);
+            return false;
         }
     }
 
