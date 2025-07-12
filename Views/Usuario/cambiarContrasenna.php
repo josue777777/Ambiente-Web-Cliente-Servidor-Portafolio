@@ -6,9 +6,6 @@
     {
         session_start();
     }
-
-    $idUsuario = $_SESSION["IdUsuario"];
-    $resultado = ConsultarInfoUsuario($idUsuario);
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +30,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Perfil de Usuario</h4>
+                                <h4 class="card-title">Cambiar Contraseña</h4>
                             </div>
                             <hr>
                             <form class="form-horizontal" action="" method="POST">
@@ -47,33 +44,29 @@
                                     ?>
 
                                     <div class="form-group row">
-                                        <label class="col-sm-3 text-right control-label col-form-label">Identificación</label>
-                                        <div class="col-lg-7">
-                                            <input id="txtIdentificacion" name="txtIdentificacion" type="text" class="form-control form-control-lg"
-                                            value="<?php echo $resultado["Identificacion"] ?>" 
-                                            onkeyup="ConsultarNombreApi()">
+                                        <label class="col-sm-3 text-right control-label col-form-label">Contraseña Anterior</label>
+                                        <div class="col-md-7">
+                                            <input id="txtContrasennaAnterior" name="txtContrasennaAnterior" type="password" class="form-control form-control-lg">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
-                                        <label class="col-sm-3 text-right control-label col-form-label">Nombre</label>
+                                        <label class="col-sm-3 text-right control-label col-form-label">Contraseña Nueva</label>
                                         <div class="col-md-7">
-                                            <input id="txtNombre" name="txtNombre" type="text" class="form-control form-control-lg"
-                                            value="<?php echo $resultado["Nombre"] ?>">
+                                            <input id="txtContrasennaNueva" name="txtContrasennaNueva" type="password" class="form-control form-control-lg">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
-                                        <label class="col-sm-3 text-right control-label col-form-label">Correo</label>
+                                        <label class="col-sm-3 text-right control-label col-form-label">Confirmar Contraseña Nueva</label>
                                         <div class="col-md-7">
-                                            <input id="txtCorreo" name="txtCorreo" type="email" class="form-control form-control-lg"
-                                            value="<?php echo $resultado["Correo"] ?>">
+                                            <input id="txtConfirmar" name="txtConfirmar" type="password" class="form-control form-control-lg">
                                         </div>
                                     </div>
 
                                      <div class="row">
                                         <div class="col-md-10 text-right pb-2">
-                                            <button id="btnActualizarPerfilUsuario" name="btnActualizarPerfilUsuario" class="btn btn-lg btn-info" type="submit">Procesar</button>
+                                            <button id="btnActualizarContrasenna" name="btnActualizarContrasenna" class="btn btn-lg btn-info" type="submit">Procesar</button>
                                         </div>
                                     </div>
 

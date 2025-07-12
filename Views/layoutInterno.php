@@ -1,4 +1,5 @@
 <?php
+    include_once $_SERVER["DOCUMENT_ROOT"] . '/Curso/Controllers/homeController.php';
 
     if(session_status() == PHP_SESSION_NONE)
     {
@@ -8,10 +9,18 @@
     function ShowHeader()
     {
         $nombreUsuario = "";
+        $nombreRol = "";
+
         if(isset($_SESSION["Nombre"]))
         {
            $nombreUsuario = $_SESSION["Nombre"];
         }
+
+        if(isset($_SESSION["NombreRol"]))
+        {
+           $nombreRol = $_SESSION["NombreRol"];
+        }
+
 
         echo 
             '<header class="topbar">
@@ -43,6 +52,12 @@
                     <div class="navbar-collapse collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav float-left mr-auto">
                             
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="m-l-5 font-medium d-none d-sm-inline-block">' . $nombreRol . '</span>
+                                </a>
+                            </li>
+
                         </ul>
                         <ul class="navbar-nav float-right">
                             <li class="nav-item dropdown">
@@ -54,18 +69,27 @@
                                         <span class="bg-primary"></span>
                                     </span>
                                     <div class="profile-dis scrollable">
-                                        <div class="dropdown-divider"></div>
+                                        
+                                    <div class="dropdown-divider"></div>
+                                        
                                         <a class="dropdown-item" href="../Usuario/consultarPerfil.php">
                                             <i class="fa fa-user-circle mr-2"></i> Pefil de Usuario
                                         </a>   
+                                        
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="../Usuario/consultarPerfil.php">
+                                        
+                                        <a class="dropdown-item" href="../Usuario/cambiarContrasenna.php">
                                             <i class="fa fa-lock mr-2"></i> Control de Seguridad
                                         </a>
+
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="javascript:void(0)">
-                                            <i class="fa fa-sign-out mr-2"></i> Cerrar Sesión
-                                        </a>
+
+                                        <form class="form-horizontal" action="" method="POST">
+                                            <button id="btnCerrarSesion" name="btnCerrarSesion" type="submit" class="dropdown-item" style="cursor: pointer;">
+                                                <i class="fa fa-sign-out mr-2"></i> Cerrar Sesión
+                                            </button>
+                                        </form>
+
                                     </div>
                                 </div>
                             </li>
@@ -85,13 +109,34 @@
 
     function ShowMenu()
     {
+        $idRol = "";
+
+        if(isset($_SESSION["IdRol"]))
+        {
+           $idRol = $_SESSION["IdRol"];
+        }
+
         echo 
             '<aside class="left-sidebar">
                 <div class="scroll-sidebar">
                     <nav class="sidebar-nav">
-                        <ul id="sidebarnav">
-                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.html" aria-expanded="false"><i class="ti-loop"></i><span class="hide-menu">Back To Home</span></a></li>
-                        </ul>
+                        <ul id="sidebarnav">';
+
+                        if($idRol != 1)
+                        {
+                            echo '
+                            <li class="sidebar-item"> 
+                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.html" aria-expanded="false">
+                                    <i class="ti-tag"></i><span class="hide-menu">Mant. Productos</span>
+                                </a>
+                            </li>';
+                        }
+                        else
+                        {
+                            
+                        }
+
+        echo '          </ul>
                     </nav>
                 </div>
             </aside>';
@@ -125,7 +170,8 @@
             <script src="../Funciones/sparkline.js"></script>
             <script src="../Funciones/waves.js"></script>
             <script src="../Funciones/sidebarmenu.js"></script>
-            <script src="../Funciones/custom.min.js"></script>';
+            <script src="../Funciones/custom.min.js"></script>
+            <script src="../Funciones/comunes.js"></script>';
     }
 
 ?>

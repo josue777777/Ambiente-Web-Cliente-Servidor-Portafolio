@@ -19,6 +19,9 @@
             $datos = mysqli_fetch_array($respuesta);
             $_SESSION["Nombre"] = $datos["Nombre"];
             $_SESSION["IdUsuario"] = $datos["IdUsuario"];
+            $_SESSION["Contrasenna"] = $datos["Contrasenna"];
+            $_SESSION["IdRol"] = $datos["IdRol"];
+            $_SESSION["NombreRol"] = $datos["NombreRol"];
 
             header("location: ../../Views/Home/principal.php");
         }
@@ -79,6 +82,12 @@
         }
 
         $_POST["txtMensaje"] = "Su acceso no fue recuperado correctamente.";
+    }
+
+    if(isset($_POST["btnCerrarSesion"]))
+    {
+        session_destroy();
+        header("location: ../../Views/Home/login.php");
     }
 
 ?>
