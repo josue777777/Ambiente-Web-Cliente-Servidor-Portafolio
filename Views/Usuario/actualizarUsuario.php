@@ -7,8 +7,9 @@
         session_start();
     }
 
-    $idUsuario = $_SESSION["IdUsuario"];
+    $idUsuario = $_GET['q'];
     $resultado = ConsultarInfoUsuario($idUsuario);
+    $rolesSistema = ConsultarRoles();
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +34,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Perfil de Usuario</h4>
+                                <h4 class="card-title">Actualizar Usuario</h4>
                             </div>
                             <hr>
                             <form class="form-horizontal" action="" method="POST">
@@ -68,6 +69,29 @@
                                         <div class="col-md-7">
                                             <input id="txtCorreo" name="txtCorreo" type="email" class="form-control"
                                             value="<?php echo $resultado["Correo"] ?>">
+                                        </div>
+                                    </div>
+
+                                     <div class="form-group row">
+                                        <label class="col-sm-3 text-right control-label col-form-label">Rol Sistema</label>
+                                        <div class="col-md-7">
+                                            <select id="listaRoles" name="listaRoles" class="form-control">
+
+                                                <?php  
+                                                    While($fila = mysqli_fetch_array($rolesSistema))
+                                                    {
+                                                        if($resultado["IdRol"] == $fila["IdRol"])
+                                                        {
+                                                            echo "<option selected value=". $fila["IdRol"] .">" . $fila["NombreRol"] . "</option>";
+                                                        }
+                                                        else
+                                                        {
+                                                            echo "<option value=". $fila["IdRol"] .">" . $fila["NombreRol"] . "</option>";
+                                                        }   
+                                                    }
+                                                ?>
+                        
+                                            </select>
                                         </div>
                                     </div>
 
